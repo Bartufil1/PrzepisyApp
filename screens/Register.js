@@ -1,38 +1,50 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
-import { useState } from 'react';
-import registerBackground from "./image/register.png"
-import { auth } from '../firebase';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-const Register = () =>{
-    const navigation = useNavigation()
-     
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
+import registerBackground from './image/register.png';
+import {auth} from '../firebase';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import axios from 'axios';
+const Register = () => {
+  const navigation = useNavigation();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleUsernameChange = (text) => {
+  const handleUsernameChange = text => {
     setUsername(text);
-  }
+  };
 
-  const handleEmailChange = (text) => {
+  const handleEmailChange = text => {
     setEmail(text);
-  }
+  };
 
-  const handlePasswordChange = (text) => {
+  const handlePasswordChange = text => {
     setPassword(text);
-  }
+  };
 
-  const handleConfirmPasswordChange = (text) => {
+  const handleConfirmPasswordChange = text => {
     setConfirmPassword(text);
-  }
+  };
 
   const handleRegister = () => {
     // Handle registration logic here
-    createUserWithEmailAndPassword(auth, email,password).then(user=>navigation.navigate("Home",{mail:user.user.email})).catch(e=>console.log(e))
-  }
+    // createUserWithEmailAndPassword(auth, email, password);
+    axios
+      .post('http://10.0.2.2:3000/api/user/create', {username, email, password})
+      .then(user => navigation.navigate('Login'))
+      .catch(e => console.log(e));
+  };
 
   return (
     <View style={styles.container}>
@@ -65,16 +77,13 @@ const Register = () =>{
           value={confirmPassword}
           secureTextEntry={true}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleRegister}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Zarejestruj się</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 export default Register;
 
 const styles = StyleSheet.create({

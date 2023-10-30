@@ -1,17 +1,16 @@
-import React from "react";
-import { View, Image } from "react-native";
-import { COLORS } from "../screens/constants";
+import React from 'react';
+import {View, Image} from 'react-native';
+import {COLORS} from '../screens/constants';
 
-const TabIcon = ({ focused, icon }) => {
+const TabIcon = ({focused, icon}) => {
   return (
     <View
       style={{
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 80,
         width: 50,
-      }}
-    >
+      }}>
       <Image
         source={icon}
         resizeMode="contain"
@@ -24,7 +23,7 @@ const TabIcon = ({ focused, icon }) => {
       {focused && (
         <View
           style={{
-            position: "absolute",
+            position: 'absolute',
             left: 0,
             right: 0,
             bottom: 8,

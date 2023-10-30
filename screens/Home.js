@@ -20,19 +20,16 @@ import {ImageBackground} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 
 const Home = () => {
-  const query = useState('');
+  const query = useState('test');
   const route = useRoute();
 
   const [data, setData] = useState([]);
   const getData = () => {
-    axios
-      .get(
-        'https://api.spoonacular.com/recipes/random?number=10&apiKey=c0bc41e997cc4c38912e4671df4527ce',
-      )
-      .then(response => {
-        setData(response.data);
-        //console.log(response)
-      });
+    console.log(query);
+    axios.get('http://10.0.2.2:3000/api/recipe/getAll').then(response => {
+      setData(response.data);
+      console.log(response.data);
+    });
   };
   useEffect(() => {
     getData();
@@ -42,28 +39,20 @@ const Home = () => {
 
   const [data2, setData2] = useState([]);
   const getData2 = () => {
-    axios
-      .get(
-        'https://api.spoonacular.com/recipes/random?number=5&apiKey=c0bc41e997cc4c38912e4671df4527ce',
-      )
-      .then(response => {
-        setData2(response.data);
-        // console.log(response)}
-      });
+    axios.get('http://10.0.2.2:3000/api/recipe/getAll').then(response => {
+      setData2(response.data);
+      console.log(response.data);
+    });
   };
   const [isReady, setReady] = useState(false);
 
   const getData3 = query => {
     console.log(query);
-    axios
-      .get(
-        `https://api.spoonacular.com/recipes/complexSearch?&apiKey=c0bc41e997cc4c38912e4671df4527ce&query=${query}`,
-      )
-      .then(response => {
-        console.log(response.data.results);
-        setData3(response.data.results);
-        //console.log(response)
-      });
+    axios.get(`http://10.0.2.2:3000/api/recipe/getAll`).then(response => {
+      console.log(response.data.results);
+      setData3(response.data.results);
+      console.log(response.data);
+    });
   };
   const [data3, setData3] = useState([]);
 
@@ -72,30 +61,24 @@ const Home = () => {
   function renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Trening')}>
           <Image
-            source={{
-              uri: 'https://cdn-icons-png.flaticon.com/128/4673/4673886.png',
-            }}
+            source={require('./image/gymwindow.png')}
             style={styles.headerImage}
           />
         </TouchableOpacity>
         <View style={styles.headerTextContainer}>
-          <Text style={styles.headerGreetingText}>
-            HI {route.params.mail} !
-          </Text>
           <Text style={styles.headerQuestionText}>HOW COOK TODAY?</Text>
         </View>
       </View>
     );
   }
-
   function renderSearchBar() {
     return (
       <View style={styles.searchContainer}>
         <AutocompleteInput
           data={data3}
-          value={query}
+          value={query[0]}
           onChangeText={text => getData3(text)}
           flatListProps={{
             keyExtractor: (_, idx) => idx.toString(),
@@ -144,7 +127,7 @@ const Home = () => {
       <View style={styles.trendingSectionContainer}>
         <Text style={styles.trendingSectionTitle}>Top Przepisy na dziś</Text>
         <FlatList
-          data={data.recipes}
+          data={data}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => `${item.id}`}
@@ -179,7 +162,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data2.recipes}
+        data={data2}
         keyExtractor={item => item.id.toString()}
         keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}

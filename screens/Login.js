@@ -13,6 +13,7 @@ import {useState} from 'react';
 import backgroundImage from './image/loginPicture.png';
 import {auth} from '../firebase';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import axios from 'axios';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -31,8 +32,9 @@ const Login = () => {
 
     const handleLogin = () => {
       // Handle login logic here
-      signInWithEmailAndPassword(auth, username, password)
-        .then(user => navigation.navigate('Home', {mail: user.user.email}))
+      axios
+        .post('http://10.0.2.2:3000/api/user/auth', {username, password})
+        .then(user => navigation.navigate('Home'))
         .catch(e => console.log(e));
     };
 

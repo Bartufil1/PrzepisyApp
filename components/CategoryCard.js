@@ -1,31 +1,29 @@
-import React from "react";
-import { TouchableOpacity, Image, Text, View, StyleSheet } from "react-native";
+import React from 'react';
+import {TouchableOpacity, Image, Text, View, StyleSheet} from 'react-native';
 
-import { COLORS, FONTS, SIZES } from "../screens/constants";
+import {COLORS, FONTS, SIZES} from '../screens/constants';
 
-const CategoryCard = ({ containerStyle, categoryItem, onPress }) => {
+const CategoryCard = ({containerStyle, categoryItem, onPress}) => {
   return (
     <TouchableOpacity
       style={[styles.container, containerStyle]}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       <Image
-        source={{uri:categoryItem.image}}
+        source={{uri: categoryItem.image}}
         resizeMode="cover"
         style={styles.image}
       />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>
-          {categoryItem.name}
-        </Text>
+        <Text style={styles.title}>{categoryItem.name}</Text>
         <Image
-        source={{uri:"https://cdn-icons-png.flaticon.com/512/5126/5126846.png"}}
-      />
-        <Text style={styles.subtitle}>
-          {categoryItem.title}
-        </Text>
+          source={{
+            uri: 'https://cdn-icons-png.flaticon.com/512/5126/5126846.png',
+          }}
+        />
+        <Text style={styles.subtitle}>{categoryItem.title}</Text>
         <Text style={styles.mintitle}>
-          {categoryItem.readyInMinutes} minutes | {categoryItem.servings} Serving
+          {categoryItem.readyInMinutes} minutes | {categoryItem.servings}{' '}
+          Serving
         </Text>
       </View>
     </TouchableOpacity>
@@ -34,12 +32,12 @@ const CategoryCard = ({ containerStyle, categoryItem, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 10,
     marginTop: 10,
     borderRadius: SIZES.radius,
-    backgroundColor: "#1C1C1E",
+    backgroundColor: '#1C1C1E',
   },
   image: {
     width: 100,
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.radius,
   },
   textContainer: {
-    width: "65%",
+    width: '65%',
     paddingHorizontal: 20,
   },
   title: {
@@ -56,15 +54,15 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
-    textAlign: 'center', 
+    textAlign: 'center',
     textTransform: 'uppercase',
     color: COLORS.white,
     ...FONTS.body4,
   },
-  mintitle:{
+  mintitle: {
     color: COLORS.gray,
     ...FONTS.body4,
-  }
+  },
 });
 
 export default CategoryCard;
