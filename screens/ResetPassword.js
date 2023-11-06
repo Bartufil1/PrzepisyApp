@@ -15,19 +15,18 @@ import {auth} from '../firebase';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const Login = () => {
+const ResetPassword = () => {
   const navigation = useNavigation();
 
   function LoginScreen() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
     const handleUsernameChange = text => {
       setUsername(text);
     };
 
-    const handlePasswordChange = text => {
-      setPassword(text);
+    const handleEmailChange = text => {
+      setEmail(text);
     };
 
     const handleLogin = () => {
@@ -41,45 +40,19 @@ const Login = () => {
         })
         .catch(e => console.log(e));
     };
-
-    const storeData = async value => {
-      try {
-        await AsyncStorage.setItem('token', JSON.stringify(value));
-      } catch (e) {
-        // saving error
-      }
-    };
-
     return (
       <View style={styles.container}>
         <Image source={backgroundImage} style={styles.logo} />
-        <Text style={styles.title}>Zaloguj się</Text>
+        <Text style={styles.title}>Reset hasła</Text>
         <View style={styles.form}>
           <TextInput
             style={styles.input}
             placeholder="Email"
-            onChangeText={handleUsernameChange}
-            value={username}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Hasło"
-            onChangeText={handlePasswordChange}
-            value={password}
-            secureTextEntry={true}
+            onChangeText={handleEmailChange}
+            value={email}
           />
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Zaloguj się</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.registerButton}
-            onPress={() => navigation.replace('Register')}>
-            <Text style={styles.registerButtonText}>Zarejestruj się</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.registerButton}
-            onPress={() => navigation.replace('ResetPassword')}>
-            <Text style={styles.registerButtonText}>Reset Hasła</Text>
+            <Text style={styles.buttonText}>Zresetuj hasło</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -97,7 +70,7 @@ const Login = () => {
     </View>
   );
 };
-export default Login;
+export default ResetPassword;
 
 const styles = StyleSheet.create({
   container: {

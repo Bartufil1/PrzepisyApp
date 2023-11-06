@@ -11,6 +11,7 @@ import {
 import {BlurView} from '@react-native-community/blur';
 import {SIZES, FONTS, COLORS, icons} from '../screens/constants';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HEADER_HEIGHT = 350;
 
@@ -115,12 +116,27 @@ const RecipeCreatorCardInfo = ({selectedRecipe}) => {
 
 const Recipe = ({navigation, route}) => {
   let {id} = route.params;
+  const getToken = async () => {
+    try {
+      const value = JSON.parse(await AsyncStorage.getItem('token'));
+      console.log(value);
+      return value;
+    } catch (e) {
+      // error reading value
+    }
+  };
   const [data, setData] = useState([]);
-  const getData = () => {
-    axios.get(`http://10.0.2.2:3000/api/recipe/get/${id}`).then(response => {
-      setData(response.data);
-      // console.log(response.data)
-    });
+  const getData = async () => {
+    const token = await getToken();
+    console.log(token);
+    axios
+      .get(`http://10.0.2.2:3000/api/recipe/get/${id}`, {
+        headers: {Authorization: 'Bearer ' + token},
+      })
+      .then(response => {
+        setData(response.data);
+        // console.log(response.data)
+      });
   };
   const [isReady, setReady] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);

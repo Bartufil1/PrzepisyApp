@@ -6,6 +6,7 @@ import 'react-native-gesture-handler';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from './TreningFolder/TreningScreen/HomeScreen';
 import PlanOverviewScreen from './TreningFolder/TreningScreen/PlanOverviewScreen';
+import ResetPassword from './screens/ResetPassword';
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Stack.Screen name="Recipe" component={Recipe} />
         <Stack.Screen name="Trening" component={HomeScreen} />
         <Stack.Screen name="PlanOverview" component={PlanOverviewScreen} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );

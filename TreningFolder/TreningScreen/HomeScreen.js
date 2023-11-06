@@ -23,13 +23,26 @@ import Rating from 'react-native-easy-rating';
 import Screen from '../components/Screen';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = () => {
   const [workouts, setWorkouts] = useState([]);
+  const getToken = async () => {
+    try {
+      const value = JSON.parse(await AsyncStorage.getItem('token'));
+      console.log(value);
+      return value;
+    } catch (e) {
+      // error reading value
+    }
+  };
   const getworkouts = async () => {
     try {
       const response = await axios.get(
         'http://10.0.2.2:3000/api/workout/getAll',
+        {
+          headers: {Authorization: 'Bearer ' + (await getToken())},
+        },
       );
       console.log(response.data);
       setWorkouts(response.data);
