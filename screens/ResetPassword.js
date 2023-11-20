@@ -32,7 +32,7 @@ const ResetPassword = () => {
     const handleLogin = () => {
       // Handle login logic here
       axios
-        .post('http://10.0.2.2:3000/api/user/auth', {username, password})
+        .post('http://10.0.2.2:3000/api/password/reset', {email})
         .then(async user => {
           console.log(user.data.token);
           await storeData(user.data.token);
