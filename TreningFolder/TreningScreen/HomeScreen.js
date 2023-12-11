@@ -27,14 +27,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = () => {
   const [workouts, setWorkouts] = useState([]);
+  const [randomWorkouts, setRandomWorkouts] = useState([]);
   const getToken = async () => {
     try {
       const value = JSON.parse(await AsyncStorage.getItem('token'));
       console.log(value);
       return value;
-    } catch (e) {
-      // error reading value
-    }
+    } catch (e) {}
   };
   const getworkouts = async () => {
     try {
@@ -50,8 +49,25 @@ const HomeScreen = () => {
       console.log(error);
     }
   };
+
+  const getRandomWorkouts = async () => {
+    try {
+      const response = await axios.get(
+        'http://10.0.2.2:3000/api/workout/getAllRandom',
+        {
+          headers: {Authorization: 'Bearer ' + (await getToken())},
+        },
+      );
+      console.log(response.data);
+      setRandomWorkouts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getworkouts();
+    getRandomWorkouts();
   }, []);
 
   const navigation = useNavigation();
@@ -61,6 +77,7 @@ const HomeScreen = () => {
   return (
     <Screen
       style={{
+        flex: 1,
         backgroundColor: 'black',
       }}>
       <ScrollView
@@ -101,29 +118,32 @@ const HomeScreen = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <TextInput
-            placeholder="Search Workouts.."
-            placeholderTextColor={Colors.text}
+          <Text
             style={{
-              fontSize: FontSize.base,
+              fontSize: 30, // Dowolny rozmiar czcionki
+              color: 'orange', // Kolor pomarańczowy
+              fontFamily: 'cursive', // Dowolny wybrany font
               width: '80%',
-            }}
-          />
-          <IconButton
-            name="options-outline"
+            }}>
+            Godzina treningu to tylko 4 % twojego dnia
+          </Text>
+          <Image
+            source={require('../assets/images/gymPictrue.png')}
             style={{
-              backgroundColor: 'orange',
+              width: 60, // dostosuj szerokość obrazka według potrzeb
+              height: 60, // dostosuj wysokość obrazka według potrzeb
+              resizeMode: 'contain', // dostosuj sposób dopasowywania obrazka
             }}
           />
         </View>
-        <SectionHeader title="Featured Workouts" />
+        <SectionHeader title="Dzisiejsze ćwiczenia dla Ciebie" />
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           decelerationRate="fast"
           pagingEnabled
           snapToInterval={270 + Spacing.margin.lg}>
-          {workouts.map(workout => (
+          {randomWorkouts.map(workout => (
             <Workout
               onPress={() =>
                 navigation.navigate('PlanOverview', {workout: workout})
@@ -133,7 +153,7 @@ const HomeScreen = () => {
             />
           ))}
         </ScrollView>
-        <SectionHeader title="Trending Plans" />
+        <SectionHeader title="Inne plany Treningowe" />
         {workouts.map(plan => (
           <TouchableOpacity
             style={{
@@ -172,7 +192,7 @@ const HomeScreen = () => {
                   style={{
                     marginLeft: Spacing.margin.base,
                   }}>
-                  {plan.duration} | {plan.location}
+                  {plan.duration} {plan.location}
                 </AppText>
               </View>
               <View

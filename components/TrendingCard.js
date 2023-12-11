@@ -28,7 +28,11 @@ const RecipeCardDetails = ({recipeItem}) => {
         <Text style={styles.recipeCardTitle}>{recipeItem.title}</Text>
       </View>
       <Text style={styles.recipeCardInfo}>
-        {recipeItem.readyInMinutes} minutes| {recipeItem.servings} Serving
+        {recipeItem.readyInMinutes}Czas przygotowania: 10 min
+        {'            '}
+        <Text style={styles.recipeCardInfo}>
+          Ilość porcji: {recipeItem.servings}
+        </Text>
       </Text>
     </View>
   );

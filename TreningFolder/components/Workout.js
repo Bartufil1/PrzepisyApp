@@ -5,6 +5,7 @@ import Spacing from '../constants/Spacing';
 import AppText from './AppText';
 import Colors from '../constants/Colors';
 import {Workout as WorkoutType} from '../data';
+import Rating from 'react-native-easy-rating';
 //KAfelki z cwiczeniami na glwnej stornie.
 const Workout = ({workout, onPress}) => {
   return (
@@ -31,7 +32,7 @@ const Workout = ({workout, onPress}) => {
         <View
           style={{
             marginBottom: Spacing.margin.base,
-            flexDirection: 'row',
+            flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
@@ -46,7 +47,16 @@ const Workout = ({workout, onPress}) => {
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <AppText style={{marginLeft: Spacing.margin.sm}}>
+            <Rating
+              rating={workout.rating}
+              max={5}
+              iconWidth={20}
+              iconHeight={20}
+            />
+            <AppText
+              style={{
+                marginLeft: Spacing.margin.sm,
+              }}>
               {workout.rating}
             </AppText>
           </View>

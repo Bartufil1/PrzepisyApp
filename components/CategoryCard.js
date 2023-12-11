@@ -22,8 +22,9 @@ const CategoryCard = ({containerStyle, categoryItem, onPress}) => {
         />
         <Text style={styles.subtitle}>{categoryItem.title}</Text>
         <Text style={styles.mintitle}>
-          {categoryItem.readyInMinutes} minutes | {categoryItem.servings}{' '}
-          Serving
+          Czas przygotowania: 25 {categoryItem.readyInMinutes} min
+          {'           '}Ilosc pocji:
+          {categoryItem.servings}
         </Text>
       </View>
     </TouchableOpacity>

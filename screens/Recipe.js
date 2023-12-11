@@ -319,7 +319,7 @@ const Recipe = ({navigation, route}) => {
         <View style={{marginBottom: 10}}>
           <Text style={{...FONTS.h2, color: 'white'}}>{data.title}</Text>
           <Text style={{color: 'white', ...FONTS.body4}}>
-            Czas przygotowania: {data.readyInMinutes} minut | Porcja:{' '}
+            Czas przygotowania: {data.readyInMinutes} 10 min | Porcja:{' '}
             {data.servings}
           </Text>
         </View>
@@ -334,7 +334,7 @@ const Recipe = ({navigation, route}) => {
             Instrukcje przygotowania:
           </Text>
           <Text style={{...FONTS.body3, color: 'white'}}>
-            {data.instructions}
+            r{data.instructions}
           </Text>
         </View>
       </View>

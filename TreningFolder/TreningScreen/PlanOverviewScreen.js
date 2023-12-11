@@ -52,7 +52,7 @@ const PlanOverviewScreen = ({route, navigation: {goBack}}) => {
               }}
             />
           </TouchableOpacity>
-          <AppText style={{marginLeft: 10}}>Plan Overview</AppText>
+          <AppText style={{marginLeft: 10}}>Plan ćwiczeń</AppText>
         </View>
         <ImageBackground
           source={{uri: workout.image}}
@@ -140,9 +140,7 @@ const PlanOverviewScreen = ({route, navigation: {goBack}}) => {
             <AppText
               style={{
                 marginLeft: Spacing.margin.sm, // Co to jest tem rating
-              }}>
-              {workout.rating}
-            </AppText>
+              }}></AppText>
           </View>
         </View>
         <AppText
@@ -216,7 +214,7 @@ const PlanOverviewScreen = ({route, navigation: {goBack}}) => {
                     fontFamily: Font['poppins-regular'],
                     marginLeft: Spacing.margin.sm,
                   }}>
-                  {exercise.time} / {exercise.set} set
+                  {exercise.time} minut / {exercise.set} serie
                 </AppText>
               </View>
               <View
@@ -228,9 +226,7 @@ const PlanOverviewScreen = ({route, navigation: {goBack}}) => {
                   style={{
                     fontFamily: Font['poppins-regular'],
                     marginLeft: Spacing.margin.sm,
-                  }}>
-                  Play
-                </AppText>
+                  }}></AppText>
               </View>
             </View>
           </TouchableOpacity>

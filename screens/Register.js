@@ -42,7 +42,10 @@ const Register = () => {
     // createUserWithEmailAndPassword(auth, email, password);
     axios
       .post('http://10.0.2.2:3000/api/user/create', {username, email, password})
-      .then(user => navigation.navigate('Login'))
+      .then(user => {
+        console.log(user);
+        navigation.navigate('Bmi', {userId: user.data.userId});
+      })
       .catch(e => console.log(e));
   };
 

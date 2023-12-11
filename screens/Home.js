@@ -20,7 +20,7 @@ import {ImageBackground} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 
 const Home = () => {
-  const query = useState('test');
+  const query = useState('');
   const route = useRoute();
 
   const [data, setData] = useState([]);
@@ -68,7 +68,7 @@ const Home = () => {
           />
         </TouchableOpacity>
         <View style={styles.headerTextContainer}>
-          <Text style={styles.headerQuestionText}>HOW COOK TODAY?</Text>
+          <Text style={styles.headerQuestionText}>CO DZIŚ UGOTUJESZ ?</Text>
         </View>
       </View>
     );
@@ -154,7 +154,7 @@ const Home = () => {
       <View style={styles.categoryHeaderContainer}>
         <Text style={styles.categoryHeaderText}>Kategorie</Text>
         <TouchableOpacity>
-          <Text style={styles.viewAllText}>View All</Text>
+          <Text style={styles.viewAllText}>Pozostałe</Text>
         </TouchableOpacity>
       </View>
     );
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   viewAllText: {
-    color: 'gray',
+    color: 'orange',
   },
   container: {
     flex: 1,

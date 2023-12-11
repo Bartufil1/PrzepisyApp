@@ -20,9 +20,7 @@ const SectionHeader = ({title}) => {
           style={{
             fontSize: FontSize.sm,
             color: 'orange',
-          }}>
-          Top ćwiczenia Na dziś
-        </AppText>
+          }}></AppText>
       </TouchableOpacity>
     </View>
   );

@@ -31,7 +31,6 @@ const Login = () => {
     };
 
     const handleLogin = () => {
-      // Handle login logic here
       axios
         .post('http://10.0.2.2:3000/api/user/auth', {username, password})
         .then(async user => {
@@ -77,9 +76,9 @@ const Login = () => {
             <Text style={styles.registerButtonText}>Zarejestruj się</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.registerButton}
+            style={styles.resetButton}
             onPress={() => navigation.replace('ResetPassword')}>
-            <Text style={styles.registerButtonText}>Reset Hasła</Text>
+            <Text style={styles.resetButtonText}>Reset Hasła</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -149,5 +148,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  resetButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  resetButton: {
+    marginTop: 10,
+    backgroundColor: 'orange',
+    padding: 10,
+    borderRadius: 5,
   },
 });
